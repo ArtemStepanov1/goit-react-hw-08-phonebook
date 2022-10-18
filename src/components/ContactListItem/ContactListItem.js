@@ -3,24 +3,22 @@ import {
     ContactItem,
     DelContactBtn,
 } from "./ContactListItem.styled";
-import { useDeleteContactMutation } from "redux/contactsSlice";
-import { Spinner } from "theme-ui";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "redux/contacts/operations";
 
 export const ContactListItem = (contact) => {
-    const { id, name, phone } = contact;
-    const [deleteContact, {isLoading: isDeleting}] = useDeleteContactMutation();
+    const { id, name, number } = contact;
+    const dispatch = useDispatch();
+    const handleDelete = () => dispatch(deleteContact(id))
 
     return(
         <ContactItem key={id}>
-            <label>{`${name}: ${phone}`}</label>
+            <label>{`${name}: ${number}`}</label>
             <DelContactBtn
                 type="button"
-                onClick={() => deleteContact(id)}
+                onClick={handleDelete}
                 >
-                { isDeleting 
-                    ? <Spinner size={12} />
-                    : <MdClose className="delContactBtnIcon" />
-                }
+                <MdClose className="delContactBtnIcon"/>
             </DelContactBtn>
         </ContactItem>
     );

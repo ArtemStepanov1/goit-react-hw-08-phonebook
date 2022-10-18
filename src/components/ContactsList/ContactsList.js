@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import { ContactList, Spin } from "./ContactsList.styled";
 import { ContactListItem } from "../ContactListItem/ContactListItem";
-import { useFetchContactsQuery } from "redux/contactsSlice";
+import { selectAllContacts } from "redux/contacts/selectors";
 
 export const ContactsList = () => {
-    const { data: contacts, isLoading } = useFetchContactsQuery();
+    const contacts = useSelector(selectAllContacts);
     const filter = useSelector(state => state.filter);
+    const selectLoading = false;
     const filteredContacts = contacts?.filter(item =>
             item.name.toLowerCase().includes(filter.toLowerCase()));
+    
     return(
         <>
-            {isLoading ? (
+            {selectLoading ? (
                 <Spin />
             ) : (
                 <ContactList>

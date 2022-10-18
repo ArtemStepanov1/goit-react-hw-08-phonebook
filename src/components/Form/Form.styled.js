@@ -15,7 +15,7 @@ export const NameInput = styled.input`
 `;
 
 export const ContactsFormBtn = styled.button`
-    width: 10vw;
+    width: 120px;
     margin-top: 32px;
     border: 2px solid lightgray;
     border-radius: 4px;
